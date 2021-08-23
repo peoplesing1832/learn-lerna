@@ -42,17 +42,99 @@
       "message": "chore(release): publish", // 执行发布版本更新时的自定义提交消息
       "registry": "https://npm.pkg.github.com" // 设置npm包发布的注册地址
     },
-    "bootstrap": {
-      "ignore": "component-*",
-      "npmClientArgs": ["--no-package-lock"]
-    }
   },
-  "packages": ["packages/*"]
+  "packages": ["packages/*"] // 指定包所在的目录
 }
 ```
 
+## 使用lerna
+
+### 安装lerna
+
+```shell
+npm install --global lerna
+```
+
+### 初始化lerna (使用默认模式)
+
+```shell
+lerna init
+```
+
+项目目录结构如下：
+
+```shell
+- 📁 packages3
+- 📃 package.json
+- 📃 lerna.json
+```
+
+在项目目录中创建三个项目
+
+![lerna-app.png](https://i.loli.net/2021/08/23/dLvmS6pIjgqV8nr.png)
+
+- app 依赖 ui, utils
+- ui 依赖 utils
+- utils 不依赖任何库，需要发布到 npm 上
+
+```shell
+lerna create app && lerna create ui && lerna create utils
+```
+
+此时项目的文件夹结构，如下图所示：
+
+![项目目录.png](https://i.loli.net/2021/08/23/ih4DHp8RkFXU9QE.png)
+
+#### 处理 utils package
+
+在 `utils.js` 中简单添加一些示例代码
+
+```js
+'use strict';
+
+module.exports = { add };
+
+function add(...args) {
+    console.log('使用 utils 库的的 add 方法')
+    let sum = 0
+    for (let i = 0; i < args.length; i += 1) {
+        sum += args[i]
+    }
+    return sum
+}
+```
+
+#### 处理 ui package
+
+1. 在 ui package 中的 package.json 文件中设置 `private: true`, npm 不会发布这个包。
+2. 将 utils 添加到 ui package 中。`lerna add utils --scope=ui`
+
+在 ui.js 中使用 utlis
+
+```js
+'use strict';
+
+const { add } = require('utils');
+
+module.exports = ui;
+
+function ui(...args) {
+  console.log('调用 ui 函数', ...args);
+  add(...args)
+}
+```
+
+#### 处理 app package
+
+1. 在 app package 中的 package.json 文件中设置 `private: true`, npm 不会发布这个包。
+
+
+
+## lerna的命令
+
 ## 参考
 
+- [package.json](https://docs.npmjs.com/cli/v7/configuring-npm/package-json)
 - [lerna](https://github.com/lerna/lerna#readme)
 - [lerna](https://lerna.js.org/)
 - [lerna多包管理实践](https://juejin.cn/post/6844904194999058440#heading-22)
