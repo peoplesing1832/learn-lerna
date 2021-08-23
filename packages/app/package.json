@@ -23,5 +23,9 @@
   "bugs": {
     "url": "https://github.com/peoplesing1832/learn-lerna/issues"
   },
-  "private": true
+  "private": true,
+  "dependencies": {
+    "ui": "^0.0.1",
+    "utils": "^0.0.1"
+  }
 }

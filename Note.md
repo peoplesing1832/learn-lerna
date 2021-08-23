@@ -127,10 +127,64 @@ function ui(...args) {
 #### 处理 app package
 
 1. 在 app package 中的 package.json 文件中设置 `private: true`, npm 不会发布这个包。
+2. 将 ui 和 utils 添加到app中。 `lerna add ui --scope=app`, `lerna add utils --scope=app`
 
+在 app.js 中 使用 ui 和 utlis
 
+```js
+'use strict';
+
+const { add } = require('utils');
+const ui = require('ui');
+
+module.exports = app;
+
+function app() {
+    add(1, 2, 3)
+    ui(1, 2, 3)
+}
+
+app()
+```
+
+运行 app, `node app.js`。得到，如下的log
+
+```js
+```
+
+## npm发布
 
 ## lerna的命令
+
+### lerna init
+
+### lerna bootstrap
+
+### lerna import
+
+### lerna add
+
+### lerna create
+
+### lerna clean
+
+### lerna ls
+
+### lerna changed
+
+### lerna diff
+
+### lerna run
+
+### lerna exec
+
+### lerna link
+
+### lerna version
+
+### lerna publish
+
+
 
 ## 参考
 
