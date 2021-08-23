@@ -159,40 +159,72 @@ app()
 
 我们需要把 utils 发布到 npm 上。如果项目需要 build。需要提前使用 build 命令对项目进行打包。
 
-接下来调用 lerna publish 发布项目，
+接下来调用 lerna publish 发布项目，由于使用的 Fixed/Locked 模式，所有项目的版本号，会根据 lerna.json 中的版本号更新。
+
+![发布1.png](https://i.loli.net/2021/08/23/ChesGxrzptjwYDT.png)
+
+选择版本后，可以看到终端页面如下：
+
+![发布2.png](https://i.loli.net/2021/08/23/PKQc2N8yGz1LHrd.png)
 
 
+三个 package 的版本号都统一为0.0.1，而且 app 和 ui 为 private，不会被发布到 npm。
 
 ## lerna的命令
 
 ### lerna init
 
+初始化 lerna 项目
+
+```shell
+
+# 固定模式
+lerna init
+
+# 独立模式
+lerna init ----independent
+```
+
 ### lerna bootstrap
+
+安装所有 package 的依赖。并且连接本地包的交叉依赖。
+
+### lerna create
+
+创建一个在 lerna 管理项目中的包。
 
 ### lerna import
 
 ### lerna add
 
-### lerna create
+将本地或者远程的包作为依赖项添加到 package 中。
+
+`lerna add react --scope=app`, 在 app 项目中添加 react
+
 
 ### lerna clean
 
+删除所有 package 的 node_modules 目录。也可以指定删除具体包下面的 node_modules。
+
+`lerna clean --scope=ui`, 删除 ui 下的 node_modules 目录。
+
 ### lerna ls
+
+列出所有公开的包（private: true的除外）
 
 ### lerna changed
 
-### lerna diff
+检查自上次发布以来，有那些包发生了更新。
 
 ### lerna run
 
-### lerna exec
+在包含该命令的每个 package 中执行命令, 也可以指定在某个 package 下执行。
 
-### lerna link
-
-### lerna version
+`lerna run build --scope=app`, 在 app 中执行build命令。
 
 ### lerna publish
 
+发布需要发布的包
 
 
 ## 参考
