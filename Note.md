@@ -149,10 +149,17 @@ app()
 
 运行 app, `node app.js`。得到，如下的log
 
-```js
+```shell
+使用 utils 库的的 add 方法
+调用 ui 函数 1 2 3
+使用 utils 库的的 add 方法
 ```
 
 ## npm发布
+
+我们需要把 utils 发布到 npm 上
+
+
 
 ## lerna的命令
 
