@@ -157,7 +157,9 @@ app()
 
 ## npm发布
 
-我们需要把 utils 发布到 npm 上
+我们需要把 utils 发布到 npm 上。如果项目需要 build。需要提前使用 build 命令对项目进行打包。
+
+接下来调用 lerna publish 发布项目，
 
 
 
